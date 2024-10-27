@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient<JsonPlaceholderService>();
 builder.Services.AddScoped<IJsonPlaceholderService,  JsonPlaceholderService>();
+builder.Services.AddScoped<ISecurityService, SecurityService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

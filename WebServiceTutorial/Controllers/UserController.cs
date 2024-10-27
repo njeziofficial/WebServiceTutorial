@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebServiceTutorial.Services;
 
@@ -15,13 +16,15 @@ namespace WebServiceTutorial.Controllers
             _jsonPlaceholderService = jsonPlaceholderService;
         }
 
-        // [HttpPost] //C: Create
-        [HttpGet] //R: Read
-                  // [HttpPut] //U: Update
-                  // [HttpDelete] //D: Delete
+        [HttpGet]
+        //[Authorize]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _jsonPlaceholderService.GetJsonPlaceholderAsync();
+            if (!users.Any())
+            {
+                return NotFound("No user was found. Hahahaahaaahahahahhahahaha!!!!");
+            }
             return Ok(users);
         }
     }
