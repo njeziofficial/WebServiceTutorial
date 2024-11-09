@@ -1,6 +1,6 @@
 ﻿namespace WebServiceTutorial.Models;
 
-public class User
+public class ExternalApiUser
 {
     public int userId { get; set; }
     public int id { get; set; }

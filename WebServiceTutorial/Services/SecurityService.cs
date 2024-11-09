@@ -1,5 +1,7 @@
 ﻿using System.Security.Cryptography;
-using WebServiceTutorial.Response;
+using System.Text;
+using WebServiceTutorial.DAL.Response;
+
 
 namespace WebServiceTutorial.Services;
 
@@ -12,7 +14,7 @@ public class SecurityService : ISecurityService
         key = configuration["Secrets:AesKey"]!;
     }
 
-    //To retur Cipher Text
+    //To return Cipher Text
     public GenericResponse<string> Encrypt(string plainText)
     {
         var response = new GenericResponse<string>();
@@ -46,6 +48,7 @@ public class SecurityService : ISecurityService
 
     }
 
+    //To return Plain Text
     public GenericResponse<string> Decrypt(string cipherText)
     {
         var response = new GenericResponse<string>();
@@ -75,6 +78,17 @@ public class SecurityService : ISecurityService
         response.IsSuccess = true;
         response.Message = "This is the decrypted text";
         return response;
+    }
+
+    public string ComputeHash( string plainText)
+    {
+        var data = SHA256.HashData(GetBytes(plainText));
+        var sBuilder = new StringBuilder();
+        for (int i = 0; i < data.Length; i++)
+        {
+            sBuilder.Append(data[i].ToString("x2"));
+        }
+        return sBuilder.ToString();
     }
     private byte[] GetBytes(string input)
     => System.Text.Encoding.UTF8.GetBytes(input);

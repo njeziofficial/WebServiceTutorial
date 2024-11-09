@@ -1,4 +1,6 @@
-﻿using WebServiceTutorial.Response;
+﻿
+
+using WebServiceTutorial.DAL.Response;
 
 namespace WebServiceTutorial.Services
 {
@@ -6,5 +8,6 @@ namespace WebServiceTutorial.Services
     {
         GenericResponse<string> Decrypt(string cipherText);
         GenericResponse<string> Encrypt(string plainText);
+        string ComputeHash(string plainText);
     }
 }

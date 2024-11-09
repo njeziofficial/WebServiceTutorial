@@ -4,6 +4,6 @@ namespace WebServiceTutorial.Services
 {
     public interface IJsonPlaceholderService
     {
-        Task<IList<User>> GetJsonPlaceholderAsync();
+        Task<IList<ExternalApiUser>> GetJsonPlaceholderAsync();
     }
 }

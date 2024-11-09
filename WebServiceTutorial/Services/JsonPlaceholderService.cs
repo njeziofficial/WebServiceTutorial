@@ -14,16 +14,16 @@ public class JsonPlaceholderService : IJsonPlaceholderService
         _httpClient = httpClient;
     }
 
-    public async Task<IList<User>> GetJsonPlaceholderAsync()
+    public async Task<IList<ExternalApiUser>> GetJsonPlaceholderAsync()
     {
         string url = "https://jsonplaceholder.typicode.com/posts";
         var result = await _httpClient.GetAsync(url);
         if (result.IsSuccessStatusCode == true)
         {
             var jsonResponse = await result.Content.ReadAsStringAsync();
-            var response = JsonSerializer.Deserialize<List<User>>(jsonResponse); //Follow come
+            var response = JsonSerializer.Deserialize<List<ExternalApiUser>>(jsonResponse); //Follow come
 
-            response = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(jsonResponse);
+            response = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ExternalApiUser>>(jsonResponse);
 
             return response;
         }
